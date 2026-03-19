@@ -7,8 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.agitator;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
@@ -24,6 +28,9 @@ public class Robot extends TimedRobot
   private RobotContainer m_robotContainer;
 
   private Timer disabledTimer;
+  private XboxController operatorXBox = new XboxController(1);
+  private Intake intake = new Intake();
+  private agitator agitator = new agitator();
 
   public Robot()
   {
@@ -140,6 +147,46 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic()
   {
+
+   if(operatorXBox.getRightBumperButton()){
+      agitator.advance(-.8);
+      agitator.agitate(.3);
+    }
+    else{
+      agitator.advance(0);
+      agitator.agitate(0);
+    }
+   if(operatorXBox.getYButton()){
+      intake.spin(-.8);
+    }
+    else{
+      intake.spin(0);
+    } 
+
+  if(operatorXBox.getXButton()){
+    intake.spin(.8);
+  } 
+  else{
+    intake.spin(0);
+  }
+
+  
+
+   if(operatorXBox.getLeftBumperButton()){
+    agitator.shoot(-.8);
+   }
+   else{
+    agitator.shoot(0);
+   }
+
+
+   // if(operatorXBox.getLeftTriggerAxis() > .25){
+     // intake.extend();
+   // }
+
+    //if(operatorXBox.getLeftBumperButton()){
+     // intake.retract();
+   // }
   }
 
   @Override
