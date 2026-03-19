@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.SwerveDriveUsingLimelight;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
@@ -186,11 +187,11 @@ public class RobotContainer
     } else
     {
       driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-      driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
-      driverXbox.start().whileTrue(Commands.runOnce(drivebase::zeroGyroWithAlliance));
+      //driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
+      //driverXbox.start().whileTrue(Commands.runOnce(drivebase::zeroGyroWithAlliance));
       driverXbox.back().whileTrue(Commands.none());
       driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
-      driverXbox.rightBumper().onTrue(Commands.none());
+      driverXbox.rightBumper().whileTrue(new SwerveDriveUsingLimelight(drivebase,driverXbox));
     }
 
     //Operator Bindings
