@@ -32,6 +32,8 @@ public final class Constants
 
   public static final int intakeID = 18;
   public static final int agitatorID = 20;
+
+  public static final int pchID = 19;
   
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 

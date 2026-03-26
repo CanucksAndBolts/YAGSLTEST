@@ -156,37 +156,28 @@ public class Robot extends TimedRobot
       agitator.advance(0);
       agitator.agitate(0);
     }
-   if(operatorXBox.getYButton()){
+   if(operatorXBox.getXButton()){
       intake.spin(-.8);
+    }
+    else if(operatorXBox.getAButton()){
+      intake.spin(.8);
     }
     else{
       intake.spin(0);
     } 
 
-  if(operatorXBox.getXButton()){
-    intake.spin(.8);
-  } 
-  else{
-    intake.spin(0);
-  }
-
-  
-
    if(operatorXBox.getLeftBumperButton()){
     agitator.shoot(-.8);
+    System.out.print("Shooting");
    }
    else{
     agitator.shoot(0);
    }
 
-
-   // if(operatorXBox.getLeftTriggerAxis() > .25){
-     // intake.extend();
-   // }
-
-    //if(operatorXBox.getLeftBumperButton()){
-     // intake.retract();
-   // }
+    if(operatorXBox.getYButtonPressed()){
+      intake.extend();
+      System.out.print("Extend");
+    }
   }
 
   @Override
